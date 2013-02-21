@@ -2,13 +2,18 @@ package natrem.tool.filereader;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * {@link FileContentInput} to iterate through all lines of a file on demand.
+ * 
+ * @author natrem
+ *
+ */
 public class FileInput implements FileContentInput {
     
     private static final Log log = LogFactory.getLog(FileInput.class);

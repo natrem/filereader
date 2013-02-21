@@ -3,7 +3,6 @@ package natrem.tool.filereader;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +20,6 @@ public class FileInputTest {
     private static final String OTHER_LINE = "line2";
 
     private File VALID_FILE;
-    private File FILE_DOES_NOT_EXIST;
     private FileContentInput VALID_FILE_INPUT;
     
     @Before
@@ -30,7 +28,6 @@ public class FileInputTest {
         VALID_FILE.deleteOnExit();
         FileUtils.writeLines(VALID_FILE, Arrays.asList(SOME_LINE, OTHER_LINE));
         
-        FILE_DOES_NOT_EXIST = new File("");
         VALID_FILE_INPUT = new FileInput(VALID_FILE);
     }
     

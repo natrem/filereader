@@ -12,6 +12,13 @@ import org.apache.commons.io.filefilter.CanReadFileFilter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * {@link FileContentInput} to iterate through all lines of all readable files
+ * in a directory. Iteration is not recursive.
+ * 
+ * @author natrem
+ * 
+ */
 public class DirectoryInput implements FileContentInput {
 
     private static final Log log = LogFactory.getLog(DirectoryInput.class);
