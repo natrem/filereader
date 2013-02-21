@@ -22,7 +22,7 @@ public class FileInputTest {
 
     private File VALID_FILE;
     private File FILE_DOES_NOT_EXIST;
-    private FileContentInput VALID_FILE_INPUT = new FileInput(VALID_FILE);
+    private FileContentInput VALID_FILE_INPUT;
     
     @Before
     public void createTestFile() throws IOException {
@@ -34,17 +34,15 @@ public class FileInputTest {
         VALID_FILE_INPUT = new FileInput(VALID_FILE);
     }
     
-    @Test
-    public void should_get_null_iterator_if_file_invalid() throws Exception {
-        FileContentInput input = new FileInput(FILE_DOES_NOT_EXIST);
-        Iterator<String> it = input.iterator();
-        assertNull(it);
+    @Test(expected=IllegalStateException.class)
+    public void should_throw_IllegalStateException_if_file_deleted() throws Exception {
+        VALID_FILE.delete();
+        VALID_FILE_INPUT.iterator();
     }
 
     @Test
     public void should_get_valid_iterator() throws Exception {
-        FileContentInput input = new FileInput(VALID_FILE);
-        Iterator<String> it = input.iterator();
+        Iterator<String> it = VALID_FILE_INPUT.iterator();
         assertNotNull(it);
     }
 
@@ -93,4 +91,5 @@ public class FileInputTest {
     public void should_not_throw_exception_if_close_when_no_iterator() throws Exception {
         VALID_FILE_INPUT.close();
     }
+
 }

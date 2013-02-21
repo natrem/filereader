@@ -2,6 +2,7 @@ package natrem.tool.filereader;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
@@ -22,12 +23,13 @@ public class FileInput implements FileContentInput {
     @Override
     public LineIterator iterator() {
         if (iterator != null) {
-            throw new IllegalStateException("there is already an iterator for this FileInput. Close it first");
+            throw new IllegalStateException("there is already an iterator. Close it first");
         }
         try {
             iterator = FileUtils.lineIterator(file);
         } catch (IOException e) {
             log.warn("Cannot iterate file " + file.getName(), e);
+            throw new IllegalStateException(e);
         }
         return iterator;
     }
@@ -38,6 +40,10 @@ public class FileInput implements FileContentInput {
             iterator.close();
             iterator = null;
         }
+    }
+    
+    public File getFile() {
+        return file;
     }
 
 }
