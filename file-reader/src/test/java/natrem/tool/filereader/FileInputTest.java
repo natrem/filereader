@@ -14,6 +14,8 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.google.common.collect.Iterators;
+
 public class FileInputTest {
     
     private static final String SOME_LINE = "line1";
@@ -46,12 +48,7 @@ public class FileInputTest {
     @Test
     public void should_iterate_all_lines() throws Exception {
         Iterator<String> it = VALID_FILE_INPUT.iterator();
-        int nbLines = 0;
-        while (it.hasNext()) {
-            nbLines++;
-            it.next();
-        }
-        assertEquals(2, nbLines);
+        assertEquals(2, Iterators.size(it));
     }
 
     @Test
