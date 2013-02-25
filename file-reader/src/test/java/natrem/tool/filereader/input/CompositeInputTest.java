@@ -1,4 +1,4 @@
-package natrem.tool.filereader;
+package natrem.tool.filereader.input;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -6,6 +6,9 @@ import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.when;
 
 import java.util.Iterator;
+
+import natrem.tool.filereader.input.CompositeInput;
+import natrem.tool.filereader.input.FileContentInput;
 
 import org.junit.Before;
 import org.junit.Test;

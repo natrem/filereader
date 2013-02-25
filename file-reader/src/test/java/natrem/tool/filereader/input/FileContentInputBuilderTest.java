@@ -1,4 +1,4 @@
-package natrem.tool.filereader;
+package natrem.tool.filereader.input;
 
 import static org.junit.Assert.*;
 
@@ -7,6 +7,10 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
+
+import natrem.tool.filereader.input.CompositeInput;
+import natrem.tool.filereader.input.FileContentInput;
+import natrem.tool.filereader.input.FileContentInputBuilder;
 
 import org.apache.commons.configuration.HierarchicalConfiguration;
 import org.apache.commons.configuration.HierarchicalConfiguration.Node;

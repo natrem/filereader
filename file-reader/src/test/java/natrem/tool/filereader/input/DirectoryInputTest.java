@@ -1,4 +1,4 @@
-package natrem.tool.filereader;
+package natrem.tool.filereader.input;
 
 import static org.hamcrest.collection.IsCollectionContaining.hasItems;
 import static org.junit.Assert.assertEquals;
@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+
+import natrem.tool.filereader.input.DirectoryInput;
+import natrem.tool.filereader.input.FileContentInput;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;

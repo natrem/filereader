@@ -1,4 +1,4 @@
-package natrem.tool.filereader;
+package natrem.tool.filereader.input;
 
 import java.io.IOException;
 import java.util.ArrayList;

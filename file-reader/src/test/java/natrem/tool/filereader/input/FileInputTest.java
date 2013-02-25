@@ -1,4 +1,4 @@
-package natrem.tool.filereader;
+package natrem.tool.filereader.input;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+
+import natrem.tool.filereader.input.FileContentInput;
+import natrem.tool.filereader.input.FileInput;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
