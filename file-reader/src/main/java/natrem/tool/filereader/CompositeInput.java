@@ -27,4 +27,7 @@ public class CompositeInput implements FileContentInput {
         }
     }
 
+    public int size() {
+        return inputs.size();
+    }
 }

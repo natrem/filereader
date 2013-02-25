@@ -52,6 +52,11 @@
       <artifactId>mockito-core</artifactId>
       <version>1.9.0</version>
     </dependency>
+    <dependency>
+      <groupId>commons-configuration</groupId>
+      <artifactId>commons-configuration</artifactId>
+      <version>1.8</version>
+    </dependency>
   </dependencies>
 
   <build>
