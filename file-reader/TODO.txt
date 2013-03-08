@@ -1,0 +1,16 @@
+- add main method to control the filereader ?
+- number of deals per file: maxdealcount=2000
+- message output frequency (ms): frequency=1
+- change the num_trans: alteridentity=false
+
+implementation example:
+result.alterDealUniqueId(
+    "No"+ deal_count_per_file + "-" +
+    getShortFileName( getCurrentFileName() ) +
+        DateTools.getyyyyMMdd_HHmmss( new Date() )
+    );
+    this.tibrvMsg.update(GusMsgDescriptor.DEAL_MARKET_REF, pDealUniqueId);
+    this.tibrvMsg.update(GusMsgDescriptor.DEAL_UNIQUE_ID, pDealUniqueId);
+- create a Transformer<Message, Message> for alteridentity
+- Handle frequency during output; could be done with a Function
+- use Iterators.limit() for maxdealcount
