@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.commons.configuration.HierarchicalConfiguration;
 
-public class FileContentInputBuilder {
+public class FileContentInputBuilder implements InputBuilder {
 
     private static final String FILE_INPUT = "fileInput";
     private static final String DIRECTORY_INPUT = "directoryInput";
@@ -13,6 +13,7 @@ public class FileContentInputBuilder {
 
     private CompositeInput compositeInput = new CompositeInput();
 
+    @Override
     public FileContentInput buildFromConfig(
             HierarchicalConfiguration configuration) {
         addFileInputsFromConfig(configuration);

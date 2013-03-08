@@ -15,9 +15,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import natrem.tool.filereader.input.DirectoryInput;
-import natrem.tool.filereader.input.FileContentInput;
-
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Rule;

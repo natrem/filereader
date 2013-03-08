@@ -7,9 +7,6 @@ import static org.mockito.Mockito.when;
 
 import java.util.Iterator;
 
-import natrem.tool.filereader.input.CompositeInput;
-import natrem.tool.filereader.input.FileContentInput;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
