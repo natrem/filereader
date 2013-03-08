@@ -1,10 +1,5 @@
 package natrem.tool.filereader;
 
-import static java.util.Arrays.asList;
-
-import java.io.File;
-
-import joptsimple.OptionParser;
 import natrem.tool.filereader.input.FileContentInput;
 import natrem.tool.filereader.input.FileContentInputBuilder;
 import natrem.tool.filereader.input.InputBuilder;
