@@ -3,6 +3,8 @@ package natrem.tool.filereader.output;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import natrem.tool.filereader.transform.Transformer;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -13,7 +15,7 @@ import com.google.common.base.Function;
 public class SendersTest {
     
     @Mock
-    private Function<String, String> transformer;
+    private Transformer<String, String> transformer;
 
     @Mock
     private Sender<String> sender;
@@ -27,9 +29,9 @@ public class SendersTest {
     public void should_create_function() throws Exception {
         Function<String, Void> output = Senders.function(transformer, sender);
         when(transformer.apply("toto")).thenReturn("titi");
-        
+
         output.apply("toto");
         verify(transformer).apply("toto");
-        verify(sender).send("titi");
+        verify(sender).apply("titi");
     }
 }

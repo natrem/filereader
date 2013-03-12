@@ -107,4 +107,15 @@ public class FileContentInputBuilderTest {
         it.hasNext();
     }
 
+    @Test
+    public void should_build_with_max_count() throws Exception {
+        Node countNode = new Node("maxCount", 1);
+        validFileInputNode.addChild(countNode);
+        
+        configuration.addNodes(null, Collections.singleton(validFileInputNode));
+        FileContentInput input = new FileContentInputBuilder().buildFromConfig(configuration);
+
+        assertTrue(input instanceof CompositeInput);
+        assertEquals(1, ((CompositeInput)input).size());        
+    }
 }

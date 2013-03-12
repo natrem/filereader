@@ -1,6 +1,7 @@
 package natrem.tool.filereader.output;
 
-public interface Sender<T> {
+import com.google.common.base.Function;
 
-    void send(T t);
+public interface Sender<T> extends Function<T, Void>{
+
 }

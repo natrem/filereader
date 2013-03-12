@@ -10,6 +10,7 @@ public class FileContentInputBuilder implements InputBuilder {
     private static final String FILE_INPUT = "fileInput";
     private static final String DIRECTORY_INPUT = "directoryInput";
     private static final String PATH = "path";
+    private static final String MAX_COUNT = "maxCount";
 
     private CompositeInput compositeInput = new CompositeInput();
 
@@ -33,22 +34,35 @@ public class FileContentInputBuilder implements InputBuilder {
      * @param configuration
      *            source configuration
      */
-    private void addFileInputsFromConfig(HierarchicalConfiguration configuration) {
+    protected void addFileInputsFromConfig(HierarchicalConfiguration configuration) {
         List<HierarchicalConfiguration> fileInputConfigs = configuration
                 .configurationsAt(FILE_INPUT);
         for (HierarchicalConfiguration fileConfig : fileInputConfigs) {
             String filePath = fileConfig.getString(PATH);
-            addFileInput(filePath);
+            FileContentInput input = createFileInput(filePath);
+            FileContentInput encapsulated = encapsulate(input, fileConfig);
+            compositeInput.add(encapsulated);
         }
     }
 
-    private void addFileInput(String filePath) {
-        File file = new File(filePath);
-        FileContentInput input = new FileInput(file);
-        compositeInput.add(input);
+    private FileContentInput encapsulate(FileContentInput input,
+            HierarchicalConfiguration fileConfig) {
+        int maxCount = fileConfig.getInt(MAX_COUNT, 0);
+        if (maxCount > 0) {
+            LimitedFileInput limited = new LimitedFileInput(input);
+            limited.setMaxCount(maxCount);
+            return limited;
+        }
+        return input;
     }
 
-    private FileContentInput build() {
+    private FileContentInput createFileInput(String filePath) {
+        File file = new File(filePath);
+        FileContentInput input = new FileInput(file);
+        return input;
+    }
+
+    protected FileContentInput build() {
         return compositeInput;
     }
 
@@ -64,19 +78,21 @@ public class FileContentInputBuilder implements InputBuilder {
      * @param configuration
      *            source configuration
      */
-    private void addDirectoryInputsFromConfig(HierarchicalConfiguration configuration) {
+    protected void addDirectoryInputsFromConfig(HierarchicalConfiguration configuration) {
         List<HierarchicalConfiguration> fileInputConfigs = configuration
                 .configurationsAt(DIRECTORY_INPUT);
         for (HierarchicalConfiguration fileConfig : fileInputConfigs) {
             String filePath = fileConfig.getString(PATH);
-            addDirectoryInput(filePath);
+            FileContentInput input = createDirectoryInput(filePath);
+            FileContentInput encapsulated = encapsulate(input, fileConfig);
+            compositeInput.add(encapsulated);
         }
     }
 
-    private void addDirectoryInput(String filePath) {
+    private FileContentInput createDirectoryInput(String filePath) {
         File file = new File(filePath);
         DirectoryInput input = new DirectoryInput(file);
-        compositeInput.add(input);
+        return input;
     }
 
 

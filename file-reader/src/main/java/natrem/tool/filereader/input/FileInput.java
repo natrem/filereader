@@ -19,31 +19,31 @@ public class FileInput implements FileContentInput {
     private static final Log log = LogFactory.getLog(FileInput.class);
 
     private File file;
-    private LineIterator iterator = null; 
-    
+    private LineIterator lineIterator = null;
+
     public FileInput(File file) {
         this.file = file;
     }
 
     @Override
     public LineIterator iterator() {
-        if (iterator != null) {
+        if (lineIterator != null) {
             throw new IllegalStateException("there is already an iterator. Close it first");
         }
         try {
-            iterator = FileUtils.lineIterator(file);
+            lineIterator = FileUtils.lineIterator(file);
         } catch (IOException e) {
             log.warn("Cannot iterate file " + file.getName(), e);
             throw new IllegalStateException(e);
         }
-        return iterator;
+        return lineIterator;
     }
-
+    
     @Override
     public void close() throws IOException {
-        if (iterator != null) {
-            iterator.close();
-            iterator = null;
+        if (lineIterator != null) {
+            lineIterator.close();
+            lineIterator = null;
         }
     }
     
