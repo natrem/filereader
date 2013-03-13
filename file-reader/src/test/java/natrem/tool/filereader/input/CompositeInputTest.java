@@ -19,11 +19,11 @@ public class CompositeInputTest {
 
     @Mock
     private FileContentInput input1;
-    private Iterator<String> iterator1 = Iterators.forArray("a", "b");
+    private Iterator<String> iterator1 = Iterators.forArray("a1", "a2", "a3");
     
     @Mock
     private FileContentInput input2;
-    private Iterator<String> iterator2 = Iterators.forArray("c", "d");
+    private Iterator<String> iterator2 = Iterators.forArray("b1", "b2", "b3");
     
     private CompositeInput COMPOSITE;
 
@@ -49,7 +49,7 @@ public class CompositeInputTest {
     @Test
     public void should_iterate_all_inputs() throws Exception {
         Iterator<String> it = COMPOSITE.iterator();
-        assertEquals(4, Iterators.size(it));
+        assertEquals(6, Iterators.size(it));
 
         InOrder inOrder = inOrder(input1, input2);
         inOrder.verify(input1).iterator();
@@ -60,10 +60,12 @@ public class CompositeInputTest {
     public void should_read_all_datas() throws Exception {
         Iterator<String> it = COMPOSITE.iterator();
 
-        assertEquals("a", it.next());
-        assertEquals("b", it.next());
-        assertEquals("c", it.next());
-        assertEquals("d", it.next());
+        assertEquals("a1", it.next());
+        assertEquals("a2", it.next());
+        assertEquals("a3", it.next());
+        assertEquals("b1", it.next());
+        assertEquals("b2", it.next());
+        assertEquals("b3", it.next());
     }
     
     @Test
@@ -73,4 +75,22 @@ public class CompositeInputTest {
         inOrder.verify(input1).close();
         inOrder.verify(input2).close();
     }
+    
+    @Test
+    public void should_limit_size_of_all_inputs() throws Exception {
+        COMPOSITE.setMaxCount(2);
+        assertEquals(4, Iterators.size(COMPOSITE.iterator()));
+    }
+
+    @Test
+    public void should_limit_size_of_each_input() throws Exception {
+        COMPOSITE.setMaxCount(2);
+        Iterator<String> it = COMPOSITE.iterator();
+
+        assertEquals("a1", it.next());
+        assertEquals("a2", it.next());
+        assertEquals("b1", it.next());
+        assertEquals("b2", it.next());
+    }
+
 }

@@ -2,7 +2,6 @@ package natrem.tool.filereader.input;
 
 import static org.hamcrest.collection.IsCollectionContaining.hasItems;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertThat;
@@ -103,12 +102,6 @@ public class DirectoryInputTest {
         assertThat(actualContent, hasItems(expectedContent));
     }
 
-    @Test(expected=IllegalStateException.class)
-    public void should_throw_IllegalStateException_if_two_iterators_on_the_same_DirectoryInput() throws Exception {
-        VALID_DIRECTORY_INPUT.iterator();
-        VALID_DIRECTORY_INPUT.iterator();
-    }
-
     @Test
     public void should_get_a_new_iterator_if_the_input_was_closed() throws Exception {
         Iterator<String> it1 = VALID_DIRECTORY_INPUT.iterator();
@@ -122,14 +115,11 @@ public class DirectoryInputTest {
         VALID_DIRECTORY_INPUT.close();
     }
 
-    @Test
-    public void should_not_rethrow_IOException() throws Exception {
+    @Test(expected=IllegalStateException.class)
+    public void should_throw_IllegalStateException_if_IOException_while_reading_files() throws Exception {
         Iterator<String> it = VALID_DIRECTORY_INPUT.iterator();
-        while (it.hasNext()) {
-            it.next();
-            SOME_FILE.delete();
-            OTHER_FILE.delete();
-        }
-        assertFalse(it.hasNext());
+      SOME_FILE.delete();
+      OTHER_FILE.delete();
+        it.hasNext();
     }
 }
