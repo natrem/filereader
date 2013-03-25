@@ -1,5 +1,5 @@
 - add main method to control the filereader ?
-- number of deals per file: maxdealcount=2000
+- number of deals per file: maxdealcount=2000 -> done
 - message output frequency (ms): frequency=1
 - change the num_trans: alteridentity=false
 
